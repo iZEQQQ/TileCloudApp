@@ -47,7 +47,7 @@ public class VisionController {
         dominantColors.getColorsList().forEach(colorInfo -> {
             colorMap.put(colorInfo.getColor().toString(), colorInfo.getPixelFraction() + "");
         });
-
+//TODO  trzeba zrobic jakas autoryzacje z kluczem do vision oraz zablokowac dostep bo jest publiczne domyslnie
         return ResponseEntity.ok(colorMap);
     }
 
