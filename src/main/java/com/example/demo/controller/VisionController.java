@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Tile;
 import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.DominantColorsAnnotation;
 import com.google.cloud.vision.v1.Feature;
@@ -47,7 +46,10 @@ public class VisionController {
         dominantColors.getColorsList().forEach(colorInfo -> {
             colorMap.put(colorInfo.getColor().toString(), colorInfo.getPixelFraction() + "");
         });
-//TODO  trzeba zrobic jakas autoryzacje z kluczem do vision oraz zablokowac dostep bo jest publiczne domyslnie
+
+//TODO Finger print ma byc skladowa listy kolorow listy przedmiotow listy napisow zapytac
+//TODO nauczyc sie wyszukiwanie plytek oraz tego jak dziala vision ai i przetestowac
+
         return ResponseEntity.ok(colorMap);
     }
 
