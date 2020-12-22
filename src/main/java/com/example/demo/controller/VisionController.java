@@ -18,40 +18,39 @@ import java.util.Map;
 
 @RestController
 public class VisionController {
-
-    private final CloudVisionTemplate cloudVisionTemplate;
-    private final ResourceLoader resourceLoader;
-
-    @Autowired
-    public VisionController(CloudVisionTemplate cloudVisionTemplate, ResourceLoader resourceLoader) {
-        this.cloudVisionTemplate = cloudVisionTemplate;
-        this.resourceLoader = resourceLoader;
-    }
-
-    @GetMapping("/vision")
-    public ResponseEntity<Map> sayHello() {
-
-        Resource resource = resourceLoader.getResource("classpath:jpg/image.jpeg");
-
-        AnnotateImageResponse imageResponse =
-                cloudVisionTemplate.analyzeImage(resource, Feature.Type.IMAGE_PROPERTIES);
-
-        ImageProperties propertiesAnnotation = imageResponse.
-                getImagePropertiesAnnotation();
-
-        DominantColorsAnnotation dominantColors = propertiesAnnotation.getDominantColors();
-
-        Map<String, String> colorMap = new HashMap<>();
-
-        dominantColors.getColorsList().forEach(colorInfo -> {
-            colorMap.put(colorInfo.getColor().toString(), colorInfo.getPixelFraction() + "");
-        });
-
-//TODO Finger print ma byc skladowa listy kolorow listy przedmiotow listy napisow zapytac
-//TODO nauczyc sie wyszukiwanie plytek oraz tego jak dziala vision ai i przetestowac
-
-        return ResponseEntity.ok(colorMap);
-    }
+//
+//    private final CloudVisionTemplate cloudVisionTemplate;
+//    private final ResourceLoader resourceLoader;
+//
+//    @Autowired
+//    public VisionController(CloudVisionTemplate cloudVisionTemplate, ResourceLoader resourceLoader) {
+//        this.cloudVisionTemplate = cloudVisionTemplate;
+//        this.resourceLoader = resourceLoader;
+//    }
+//
+//    @GetMapping("/vision")
+//    public ResponseEntity<Map> sayHello() {
+//
+//        Resource resource = resourceLoader.getResource("classpath:jpg/image.jpeg");
+//
+//        AnnotateImageResponse imageResponse =
+//                cloudVisionTemplate.analyzeImage(resource, Feature.Type.IMAGE_PROPERTIES);
+//
+//        ImageProperties propertiesAnnotation = imageResponse.
+//                getImagePropertiesAnnotation();
+//
+//        DominantColorsAnnotation dominantColors = propertiesAnnotation.getDominantColors();
+//
+//        Map<String, String> colorMap = new HashMap<>();
+//
+//        dominantColors.getColorsList().forEach(colorInfo -> {
+//            colorMap.put(colorInfo.getColor().toString(), colorInfo.getPixelFraction() + "");
+//        });
+//
+//
+//
+//        return ResponseEntity.ok(colorMap);
+//    }
 
 
 }
