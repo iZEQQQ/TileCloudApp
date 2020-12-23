@@ -47,10 +47,15 @@
 <!--			<artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>-->
 <!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-gcp-starter-vision</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-automl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-gcp-starter-vision</artifactId>
+		</dependency>
 <!--		TODO  przelaczac potem do sprawdzania czy dziala-->
 		<dependency>
 			<groupId>com.h2database</groupId>
