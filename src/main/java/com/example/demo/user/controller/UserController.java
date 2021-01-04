@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private UserService service;
+    private final UserService service;
 
     @Autowired
     public UserController(UserService service) {
@@ -46,7 +46,7 @@ public class UserController {
     }
 
 
-    //at the moment useless id cannot be changed
+
     @PutMapping("{login}")
     public ResponseEntity<Void> putUser(@PathVariable("login") String login, @RequestBody PutUserRequest request) {
         Optional<User> user = service.findUser(login);

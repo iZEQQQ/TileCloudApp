@@ -8,6 +8,7 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -21,16 +22,20 @@ public class Tile {
 
     private String name;
 
-    private String photo;
+    private byte[] photo;
 
-    private int price;
+    private String type;
+
+    private double price;
 
     private double rating;
 
-    //    dodac enuma z typem
-    public Tile(String name, String photo, int price) {
+
+
+    public Tile(String name, byte[] photo ,String type , double price) {
         this.name = name;
         this.photo = photo;
+        this.type = type;
         this.price = price;
     }
 
