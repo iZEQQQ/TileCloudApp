@@ -1,0 +1,46 @@
+package com.example.demo.tiles.service;
+
+import com.example.demo.tiles.repository.TileRepository;
+import com.example.demo.tiles.repository.model.Tile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class TileService {
+
+    private TileRepository repository;
+
+    @Autowired
+    public TileService(TileRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<Tile> findAllTiles() {
+        return repository.findAll();
+    }
+
+    public List<Long> findAllIds() {
+        return repository.findId();
+    }
+
+    public Optional<Tile> findTile(Long id) {
+        return repository.findById(id);
+    }
+
+    public void createTile(Tile tile) {
+        repository.save(tile);
+    }
+
+    public void updateTile(Tile tile) {
+        repository.save(tile);
+    }
+
+    public void deleteTile(Tile tile) {
+        repository.delete(tile);
+    }
+
+}
