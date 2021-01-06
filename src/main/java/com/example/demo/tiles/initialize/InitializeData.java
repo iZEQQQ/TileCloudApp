@@ -67,34 +67,34 @@ public class InitializeData {
 
             Tile brick = Tile.builder()
                     .name("Malinowa")
-                    .photo()
-                    .type()
-                    .price()
-                    .rating()
+                    .photo(getResourceAsByteArray("jpg/cegielka3.jpg"))
+                    .type("Cegla")
+                    .price(24.5)
+                    .rating(4.5)
                     .build();
 
             Tile brickTwo = Tile.builder()
-                    .name()
-                    .photo()
-                    .type()
-                    .price()
-                    .rating()
+                    .name("Brazowa")
+                    .photo(getResourceAsByteArray("jpg/cegielka8.jpg"))
+                    .type("Cegla")
+                    .price(66.6)
+                    .rating(2.7)
                     .build();
 
             Tile brickThree = Tile.builder()
-                    .name()
-                    .photo()
-                    .type()
-                    .price()
-                    .rating()
+                    .name("Zielona")
+                    .photo(getResourceAsByteArray("jpg/cegielka6.jpg"))
+                    .type("Cegla")
+                    .price(35.42)
+                    .rating(2.5)
                     .build();
 
             Tile brickFour = Tile.builder()
-                    .name()
-                    .photo()
-                    .type()
-                    .price()
-                    .rating()
+                    .name("Czekoladowa")
+                    .photo(getResourceAsByteArray("jpg/cegielka4.jpg"))
+                    .type("Cegla")
+                    .price(55.5)
+                    .rating(5.0)
                     .build();
 
 
