@@ -97,6 +97,10 @@ public class InitializeData {
                     .rating(5.0)
                     .build();
 
+            tileService.createTile(brick);
+            tileService.createTile(brickTwo);
+            tileService.createTile(brickThree);
+            tileService.createTile(brickFour);
 
 
         }
