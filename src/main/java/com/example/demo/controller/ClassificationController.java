@@ -42,4 +42,3 @@ public class ClassificationController {
     }
 
 }
-//TODO zrobic backend z stalymi zmiennymi by pisali front a potem zajac sie schedulingu i crowlerow

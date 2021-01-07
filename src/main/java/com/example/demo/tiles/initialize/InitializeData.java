@@ -13,7 +13,6 @@ import javax.annotation.PostConstruct;
 import java.io.InputStream;
 import java.util.List;
 
-//TODO wypelnic danymi 2-3 plytki i uzytkownikow
 @Component
 public class InitializeData {
 
