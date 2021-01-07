@@ -4,15 +4,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-
+//Component TODO for future scheduler conversion
 @RestController
 public class CrawlerController {
 
-
+//    @Scheduled(fixedRate = 432000000)
     @GetMapping("/crawl")
     public ResponseEntity<Void> scrapEplytki() throws IOException {
         String url = "https://www.eplytki.pl/plytki-lazienkowe.html?limit=72";
@@ -39,14 +40,12 @@ public class CrawlerController {
             } else {
                 break;
             }
-
-
         }
         return ResponseEntity.ok().build();
     }
-
+//    @Scheduled(fixedRate = 432000000)
     @GetMapping("/scrap")
-    public ResponseEntity<Void> scrap() throws IOException{
+    public ResponseEntity<Void> scrap() throws IOException {
         String url = "https://domus-sklep.pl/1107-wszystkie-plytki";
         while (true) {
             Document doc = Jsoup.connect(url).get();
@@ -71,12 +70,9 @@ public class CrawlerController {
             } else {
                 break;
             }
-
+        }
         return ResponseEntity.ok().build();
-
     }
-
-
 
 
 }
