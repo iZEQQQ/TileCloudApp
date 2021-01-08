@@ -44,19 +44,19 @@ public class InitializeData {
             BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
             User admin = User.builder()
                     .login("admin")
-                    .password(bc.encode("admin"))
+                    .password(bc.encode("Adm!n1234"))
                     .roles(List.of("Admin", "User"))
                     .build();
 
             User kevin = User.builder()
                     .login("kevin")
-                    .password(bc.encode("hello"))
+                    .password(bc.encode("U$er1234"))
                     .roles(List.of("User"))
                     .build();
 
             User alice = User.builder()
                     .login("alice")
-                    .password(bc.encode("oof"))
+                    .password(bc.encode("U$er1234"))
                     .roles(List.of("User"))
                     .build();
 
@@ -66,7 +66,7 @@ public class InitializeData {
 
             Tile brick = Tile.builder()
                     .name("Malinowa")
-                    .photo(getResourceAsByteArray("jpg/cegielka3.jpg"))
+                    .photo(getResourceAsByteArray("/jpg/cegielka3.jpg"))
                     .type("Cegla")
                     .price(24.5)
                     .rating(4.5)
@@ -74,7 +74,7 @@ public class InitializeData {
 
             Tile brickTwo = Tile.builder()
                     .name("Brazowa")
-                    .photo(getResourceAsByteArray("jpg/cegielka8.jpg"))
+                    .photo(getResourceAsByteArray("/jpg/cegielka8.jpg"))
                     .type("Cegla")
                     .price(66.6)
                     .rating(2.7)
@@ -82,7 +82,7 @@ public class InitializeData {
 
             Tile brickThree = Tile.builder()
                     .name("Zielona")
-                    .photo(getResourceAsByteArray("jpg/cegielka6.jpg"))
+                    .photo(getResourceAsByteArray("/jpg/cegielka6.jpg"))
                     .type("Cegla")
                     .price(35.42)
                     .rating(2.5)
@@ -90,7 +90,7 @@ public class InitializeData {
 
             Tile brickFour = Tile.builder()
                     .name("Czekoladowa")
-                    .photo(getResourceAsByteArray("jpg/cegielka4.jpg"))
+                    .photo(getResourceAsByteArray("/jpg/cegielka4.jpg"))
                     .type("Cegla")
                     .price(55.5)
                     .rating(5.0)

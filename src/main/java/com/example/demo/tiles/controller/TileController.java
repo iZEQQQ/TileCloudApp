@@ -25,7 +25,6 @@ public class TileController {
 
     @GetMapping("{tileId}")
     public ResponseEntity<GetTileResponse> getTile(@PathVariable("tileId") Long tileId) {
-
         return service.findTile(tileId)
                 .map(value -> ResponseEntity.ok(GetTileResponse.entityToDtoMapper().apply(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());

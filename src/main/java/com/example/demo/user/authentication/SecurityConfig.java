@@ -23,9 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().csrf().disable().cors().and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/tiles/**").hasRole("User")
-                .antMatchers(HttpMethod.PUT, "/api/tiles/**").hasRole("Admin")
-                .antMatchers(HttpMethod.POST, "/api/tiles/**").hasRole("Admin");
+                .antMatchers(HttpMethod.GET, "/api/tiles/**").hasRole("User");
+
     }
 
     @Autowired

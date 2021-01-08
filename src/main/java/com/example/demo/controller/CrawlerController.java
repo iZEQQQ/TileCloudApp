@@ -52,21 +52,26 @@ public class CrawlerController {
             Elements items = doc.select(".pro_outer_box");
             items.forEach(element -> {
                 Elements img = element.select(".replace-2x.img-responsive.menu_pro_img");
+                Elements imgLazy = element.select(".lazy-loading.replace-2x.img-responsive.front-image");
+                String imgUrlLazy = imgLazy.attr("data-src");
+                String titleLazy = imgLazy.attr("title");
                 String title = img.attr("alt");
                 String imgUrl = img.attr("src");
                 Elements span = element.select(".price.product-price");
                 String price = span.text();
 
-//                System.out.println(title);
-//                System.out.println(price);
-//                System.out.println(imgUrl);
+                System.out.println(title);
+                System.out.println(titleLazy);
+                System.out.println(price);
+                System.out.println(imgUrl);
+                System.out.println(imgUrlLazy);
             });
-            Elements li = doc.select(".pagination_next");
-            Elements a = li.next();
-            System.out.println(a.attr("href"));
-            System.out.println(a.size());
-            if (a.size() > 0) {
-                url = a.attr("href");
+            Elements li = doc.select(".pagination_next > a");
+
+            System.out.println(li.attr("href"));
+            System.out.println(li.size());
+            if (li.size() > 0) {
+                url = "https://domus-sklep.pl" + li.attr("href");
             } else {
                 break;
             }

@@ -2,9 +2,7 @@ package com.example.demo.tiles.repository.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -18,10 +16,12 @@ import javax.persistence.Table;
 public class Tile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
+    @Lob
     private byte[] photo;
 
     private String type;
