@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.tiles.repository.model.Tile;
+import com.example.demo.tiles.service.TileService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 //Component TODO for future scheduler conversion
 @RestController
+//Service TODO to future deployment
 public class CrawlerController {
 
-//    @Scheduled(fixedRate = 432000000)
+    private TileService service;
+
+    @Autowired
+    public CrawlerController(TileService service) {
+        this.service = service;
+    }
+
+    //    @Scheduled(cron ="MON FRI")
     @GetMapping("/crawl")
     public ResponseEntity<Void> scrapEplytki() throws IOException {
         String url = "https://www.eplytki.pl/plytki-lazienkowe.html?limit=72";
@@ -28,6 +39,15 @@ public class CrawlerController {
                 Elements span = element.select(".price");
                 String price = span.text();
 
+                Tile brick = Tile.builder()
+                        .name(title)
+//                        .photo(getResourceAsByteArray("/jpg/cegielka4.jpg"))
+//                        .type("Cegla")
+//                        .price(Double.parseDouble(price))
+                        .rating(0.0)
+                        .build();
+
+                service.createTile(brick);
 //                System.out.println(title);
 //                System.out.println(price);
 //                System.out.println(imgUrl);
