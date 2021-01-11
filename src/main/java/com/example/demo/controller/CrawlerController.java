@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+
 //Component TODO for future scheduler conversion
 @RestController
 //Service TODO to future deployment
@@ -24,7 +25,8 @@ public class CrawlerController {
         this.service = service;
     }
 
-    //    @Scheduled(cron ="MON FRI")
+
+    @Scheduled(cron = "0 0 0 * * 0")
     @GetMapping("/crawl")
     public ResponseEntity<Void> scrapEplytki() throws IOException {
         String url = "https://www.eplytki.pl/plytki-lazienkowe.html?limit=72";
@@ -63,7 +65,8 @@ public class CrawlerController {
         }
         return ResponseEntity.ok().build();
     }
-//    @Scheduled(fixedRate = 432000000)
+
+    //    @Scheduled(fixedRate = 432000000)
     @GetMapping("/scrap")
     public ResponseEntity<Void> scrap() throws IOException {
         String url = "https://domus-sklep.pl/1107-wszystkie-plytki";
