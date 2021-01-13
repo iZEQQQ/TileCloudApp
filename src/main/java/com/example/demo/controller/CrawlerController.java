@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //Component TODO for future scheduler conversion
 @RestController
@@ -25,8 +30,8 @@ public class CrawlerController {
         this.service = service;
     }
 
-
-    @Scheduled(cron = "0 0 0 * * 0")
+//    TODO  paginacje w springu i angularze
+    //    @Scheduled(cron = "0 0 0 * * 0")
     @GetMapping("/crawl")
     public ResponseEntity<Void> scrapEplytki() throws IOException {
         String url = "https://www.eplytki.pl/plytki-lazienkowe.html?limit=72";
@@ -40,13 +45,29 @@ public class CrawlerController {
                 String imgUrl = img.attr("data-src");
                 Elements span = element.select(".price");
                 String price = span.text();
+                Pattern pattern = Pattern.compile("\\d*,\\d{2}");
+                Matcher matcher = pattern.matcher(price);
+                matcher.find();
+                price = matcher.group();
+                price = price.replace(",", ".");
+                byte[] imgBytes = null;
+                try {
+                    URL photoUrl = new URL(imgUrl);
+
+                    try (InputStream stream = photoUrl.openStream()) {
+                        imgBytes = stream.readAllBytes();
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 Tile brick = Tile.builder()
                         .name(title)
-//                        .photo(getResourceAsByteArray("/jpg/cegielka4.jpg"))
+                        .photo(imgBytes)
 //                        .type("Cegla")
-//                        .price(Double.parseDouble(price))
-                        .rating(0.0)
+                        .price(Double.parseDouble(price))
                         .build();
 
                 service.createTile(brick);

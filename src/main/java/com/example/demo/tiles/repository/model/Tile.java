@@ -28,10 +28,6 @@ public class Tile {
 
     private double price;
 
-    private double rating;
-
-
-
     public Tile(String name, byte[] photo ,String type , double price) {
         this.name = name;
         this.photo = photo;

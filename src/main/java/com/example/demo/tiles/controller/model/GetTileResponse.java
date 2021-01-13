@@ -30,7 +30,6 @@ public class GetTileResponse {
                 .name(tile.getName())
                 .type(tile.getType())
                 .price(tile.getPrice())
-                .rating(tile.getRating())
                 .build();
     }
 

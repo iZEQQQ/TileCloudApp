@@ -1,7 +1,5 @@
 package com.example.demo.user.repository.model;
 
-
-import com.example.demo.tiles.repository.model.Tile;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +20,11 @@ public class User {
     private String login;
 
     private String password;
+
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    private List<Tile> reviewedTiles;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_name"))

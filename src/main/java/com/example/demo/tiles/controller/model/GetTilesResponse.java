@@ -14,8 +14,6 @@ import java.util.function.Function;
 @NoArgsConstructor
 public class GetTilesResponse {
 
-
-
     @Getter
     @Setter
     @Builder
@@ -30,6 +28,8 @@ public class GetTilesResponse {
             private String name;
 
             private double price;
+
+            private double rating;
 
     }
 

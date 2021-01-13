@@ -69,7 +69,6 @@ public class InitializeData {
                     .photo(getResourceAsByteArray("/jpg/cegielka3.jpg"))
                     .type("Cegla")
                     .price(24.5)
-                    .rating(4.5)
                     .build();
 
             Tile brickTwo = Tile.builder()
@@ -77,7 +76,6 @@ public class InitializeData {
                     .photo(getResourceAsByteArray("/jpg/cegielka8.jpg"))
                     .type("Cegla")
                     .price(66.6)
-                    .rating(2.7)
                     .build();
 
             Tile brickThree = Tile.builder()
@@ -85,7 +83,6 @@ public class InitializeData {
                     .photo(getResourceAsByteArray("/jpg/cegielka6.jpg"))
                     .type("Cegla")
                     .price(35.42)
-                    .rating(2.5)
                     .build();
 
             Tile brickFour = Tile.builder()
@@ -93,7 +90,6 @@ public class InitializeData {
                     .photo(getResourceAsByteArray("/jpg/cegielka4.jpg"))
                     .type("Cegla")
                     .price(55.5)
-                    .rating(5.0)
                     .build();
 
             tileService.createTile(brick);
