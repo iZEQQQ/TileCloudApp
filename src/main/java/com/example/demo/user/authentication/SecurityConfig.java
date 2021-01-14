@@ -19,11 +19,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public SecurityConfig(UserProviderService service) {
         this.service = service;
     }
-
+//TODO zrobic uzytkownika by jego profil sie wyswietlal i pod nim wszystkie ocenione plytki
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().csrf().disable().cors().and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/tiles/reviewed/**").hasRole("User");
+                .antMatchers(HttpMethod.GET, "/api/users/**").hasRole("User");
 
     }
 

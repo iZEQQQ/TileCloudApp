@@ -18,7 +18,7 @@ public class ClassificationController {
 
         try (PredictionServiceClient client = PredictionServiceClient.create()) {
             ModelName name = ModelName.of("217603025665", "us-central1", "ICN616089350391726080");
-            ByteString content = ByteString.copyFrom(Files.readAllBytes(Paths.get("/home/jgorny/Downloads/cegielka4.jpg")));
+            ByteString content = ByteString.copyFrom(Files.readAllBytes(Paths.get("/home/jgorny/IdeaProjects/demo/src/main/resources/jpg/cegielka0.jpg")));
             Image image = Image.newBuilder().setImageBytes(content).build();
             ExamplePayload payload = ExamplePayload.newBuilder().setImage(image).build();
             PredictRequest predictRequest =

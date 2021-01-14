@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.tiles.repository.model.Tile;
 import com.example.demo.tiles.service.TileService;
+import com.google.cloud.automl.v1.*;
+import com.google.protobuf.ByteString;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -15,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +34,9 @@ public class CrawlerController {
         this.service = service;
     }
 
-//    TODO  paginacje w springu i angularze
+//    TODO  paginacje w springu i angularze oraz zrobic jeszcze crawlera na drugi sklep by uzupelnial wszystko
+//     oraz dodawanie do bazy danych widok uzytkownika oraz wstawianie typu plytki
+
     //    @Scheduled(cron = "0 0 0 * * 0")
     @GetMapping("/crawl")
     public ResponseEntity<Void> scrapEplytki() throws IOException {
@@ -50,6 +56,7 @@ public class CrawlerController {
                 matcher.find();
                 price = matcher.group();
                 price = price.replace(",", ".");
+                String type = "";
                 byte[] imgBytes = null;
                 try {
                     URL photoUrl = new URL(imgUrl);
@@ -62,22 +69,40 @@ public class CrawlerController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+//                if (imgBytes != null) {
+//                    try (PredictionServiceClient client = PredictionServiceClient.create()) {
+//                        ModelName name = ModelName.of("217603025665", "us-central1", "ICN616089350391726080");
+//                        ByteString content = ByteString.copyFrom(imgBytes);
+//                        Image image = Image.newBuilder().setImageBytes(content).build();
+//                        ExamplePayload payload = ExamplePayload.newBuilder().setImage(image).build();
+//                        PredictRequest predictRequest =
+//                                PredictRequest.newBuilder()
+//                                        .setName(name.toString())
+//                                        .setPayload(payload)
+//                                        .putParams(
+//                                                "score_threshold", "0.8") // [0.0-1.0] Only produce results higher than this value
+//                                        .build();
+//
+//                        PredictResponse response = client.predict(predictRequest);
+//
+//                        for (AnnotationPayload annotationPayload : response.getPayloadList()) {
+//                            type = annotationPayload.getDisplayName();
+//                        }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
 
                 Tile brick = Tile.builder()
                         .name(title)
                         .photo(imgBytes)
-//                        .type("Cegla")
+//                        .type(type)
                         .price(Double.parseDouble(price))
                         .build();
 
                 service.createTile(brick);
-//                System.out.println(title);
-//                System.out.println(price);
-//                System.out.println(imgUrl);
             });
             Elements a = doc.select(".next.i-next");
-            System.out.println(a.attr("href"));
-            System.out.println(a.size());
             if (a.size() > 0) {
                 url = a.attr("href");
             } else {
@@ -103,6 +128,12 @@ public class CrawlerController {
                 String imgUrl = img.attr("src");
                 Elements span = element.select(".price.product-price");
                 String price = span.text();
+                //Mimo tego samego patternu cenowego nie dziala ???
+                Pattern pattern = Pattern.compile("\\d*,\\d{2}");
+                Matcher matcher = pattern.matcher(price);
+                matcher.find();
+                price = matcher.group();
+                price = price.replace(",", ".");
 
                 System.out.println(title);
                 System.out.println(titleLazy);
