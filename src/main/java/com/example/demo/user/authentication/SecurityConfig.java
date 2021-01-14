@@ -23,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().csrf().disable().cors().and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/users/**").hasRole("User");
+                .antMatchers(HttpMethod.GET, "/api/users/**").anonymous();
+//                .hasRole("User");
 
     }
 
