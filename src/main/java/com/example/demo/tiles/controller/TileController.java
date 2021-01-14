@@ -33,7 +33,6 @@ public class TileController {
     @GetMapping("")
     public ResponseEntity<GetTilesResponse> getTiles() {
         return ResponseEntity.ok(GetTilesResponse.entityToDtoMapper().apply(service.findAllTiles()));
-
     }
 
     @GetMapping(value = "{id}/photo", produces = MediaType.IMAGE_PNG_VALUE)

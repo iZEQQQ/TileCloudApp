@@ -37,6 +37,11 @@ public class CrawlerController {
 //    TODO  paginacje w springu i angularze oraz zrobic jeszcze crawlera na drugi sklep by uzupelnial wszystko
 //     oraz dodawanie do bazy danych widok uzytkownika oraz wstawianie typu plytki
 
+//Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+//
+//org.springframework.security.web.firewall.RequestRejectedException: The request was rejected because the URL contained a potentially malicious String "//"
+//    czasem to wyskakuje ????
+
     //    @Scheduled(cron = "0 0 0 * * 0")
     @GetMapping("/crawl")
     public ResponseEntity<Void> scrapEplytki() throws IOException {
@@ -56,7 +61,6 @@ public class CrawlerController {
                 matcher.find();
                 price = matcher.group();
                 price = price.replace(",", ".");
-                String type = "";
                 byte[] imgBytes = null;
                 try {
                     URL photoUrl = new URL(imgUrl);
@@ -129,11 +133,11 @@ public class CrawlerController {
                 Elements span = element.select(".price.product-price");
                 String price = span.text();
                 //Mimo tego samego patternu cenowego nie dziala ???
-                Pattern pattern = Pattern.compile("\\d*,\\d{2}");
-                Matcher matcher = pattern.matcher(price);
-                matcher.find();
-                price = matcher.group();
-                price = price.replace(",", ".");
+//                Pattern pattern = Pattern.compile("\\d*,\\d{2}");
+//                Matcher matcher = pattern.matcher(price);
+//                matcher.find();
+//                price = matcher.group();
+//                price = price.replace(",", ".");
 
                 System.out.println(title);
                 System.out.println(titleLazy);
