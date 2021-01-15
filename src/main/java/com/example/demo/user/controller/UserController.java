@@ -46,7 +46,6 @@ public class UserController {
     }
 
 
-
     @PutMapping("{login}")
     public ResponseEntity<Void> putUser(@PathVariable("login") String login, @RequestBody PutUserRequest request) {
         Optional<User> user = service.findUser(login);
