@@ -20,6 +20,20 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author jgorny
+ * Its a two simple crowler service for providing data from two websites:
+ * - www.eplytki.pl
+ * - www.domus-sklep.pl
+ *
+ * crowlers use jsoup to get the connection afterwards we get data from elements.
+ * After that method changes photos to bytes so the sorage is easy and efficient.
+ * Then using vision from google we get read the photo and type is automaticly assigned
+ * to the tile type. Finally with builder design pattern generated from Lombok annotation
+ * method is building object from parameters and TileService is creating a tile and saving it to the database.
+ */
+
+
 @Service
 public class CrawlerService {
 
@@ -91,7 +105,8 @@ public class CrawlerService {
                                         .build();
 
                         PredictResponse response = client.predict(predictRequest);
-                        Optional<AnnotationPayload> typeOp = response.getPayloadList().stream().max(Comparator.comparingDouble(annotationPayload -> annotationPayload.getClassification().getScore()));
+                        Optional<AnnotationPayload> typeOp = response.getPayloadList().stream()
+                                .max(Comparator.comparingDouble(annotationPayload -> annotationPayload.getClassification().getScore()));
                         if (typeOp.isPresent()) {
                             type = typeOp.get().getDisplayName();
                         }
@@ -100,14 +115,14 @@ public class CrawlerService {
                     }
                 }
 
-                Tile brick = Tile.builder()
+                Tile tile = Tile.builder()
                         .name(title)
                         .photo(imgBytes)
                         .type(type)
                         .price(Double.parseDouble(price))
                         .build();
 
-                service.createTile(brick);
+                service.createTile(tile);
             });
             Elements a = doc.select(".next.i-next");
             if (a.size() > 0) {
@@ -177,13 +192,13 @@ public class CrawlerService {
                             e.printStackTrace();
                         }
                     }
-                    Tile brick = Tile.builder()
+                    Tile tile = Tile.builder()
                             .name(title+titleLazy)
                             .photo(imgBytes)
                             .type(type)
                             .price(Double.parseDouble(price))
                             .build();
-                    service.createTile(brick);
+                    service.createTile(tile);
                 }
             });
             Elements li = doc.select(".pagination_next > a");
