@@ -19,13 +19,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public SecurityConfig(UserProviderService service) {
         this.service = service;
     }
-//TODO zrobic uzytkownika by jego profil sie wyswietlal i pod nim wszystkie ocenione plytki
-//    Rejestracja jest w aukcji z ng-auction
-//    TODO zabezpieczyc resty rekomendacji oraz oceny  a dla admina resty na crawl
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().csrf().disable().cors().and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/tiles/**")
+                .antMatchers(HttpMethod.GET, "/api/user/**")
                 .hasRole("User");
 
     }

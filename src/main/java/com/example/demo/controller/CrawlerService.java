@@ -45,7 +45,7 @@ public class CrawlerService {
     }
 
 
-//     oraz dodawanie do bazy danych widok uzytkownika
+
 //    TODO dodac po rejestracji mozliwosc oceniania
 //    TODO dodac lokalizajce z ktorego sklepu zebrano
 

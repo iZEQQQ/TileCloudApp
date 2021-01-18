@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @CrossOrigin(allowCredentials = "true")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService service;
@@ -25,20 +25,26 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("{login}")
+    @GetMapping("user")
+    public ResponseEntity<GetUserResponse> getLoggedUser() {
+        Optional<User> user = service.findLoggedUser();
+        return user.map(value -> ResponseEntity.ok(new GetUserResponse(value.getLogin())))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("users/{login}")
     public ResponseEntity<GetUserResponse> getUser(@PathVariable("login") String login) {
         Optional<User> user = service.findUser(login);
         return user.map(value -> ResponseEntity.ok(new GetUserResponse(value.getLogin())))
                 .orElseGet(() -> ResponseEntity.notFound().build());
-
     }
 
-    @GetMapping("")
+    @GetMapping("users")
     public GetUsersResponse getUsers() {
         return new GetUsersResponse(service.findAllLogins());
     }
 
-    @PostMapping("")
+    @PostMapping("users")
     public ResponseEntity<Void> postUser(@RequestBody PostUserRequest request) {
         User user = new User(request.getLogin(), request.getPassword());
         service.createUser(user);
@@ -46,9 +52,9 @@ public class UserController {
     }
 
 
-    @PutMapping("{login}")
-    public ResponseEntity<Void> putUser(@PathVariable("login") String login, @RequestBody PutUserRequest request) {
-        Optional<User> user = service.findUser(login);
+    @PutMapping("user")
+    public ResponseEntity<Void> putUser(@RequestBody PutUserRequest request) {
+        Optional<User> user = service.findLoggedUser();
         if (user.isPresent()) {
             user.get().setPassword(request.getPassword());
             service.updateUser(user.get());
@@ -57,17 +63,5 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @DeleteMapping("{login}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("login") String login) {
-        Optional<User> user = service.findUser(login);
-        if (user.isPresent()) {
-            service.deleteUser(user.get());
-            return ResponseEntity.accepted().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
 
 }
