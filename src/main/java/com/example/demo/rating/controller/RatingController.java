@@ -26,6 +26,10 @@ public class RatingController {
 
     private TileService tileService;
 
+//    TODO in context with path [] threw exception [Request processing failed; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.util.ArrayList<?>] to type [@org.springframework.data.jpa.repository.Query java.util.List<com.example.demo.rating.repository.model.Rating>] for value '[1, 1, 1]'; nested exception is org.springframework.core.convert.ConverterNotFoundException: No converter found capable of converting from type [java.lang.Long] to type [@org.springframework.data.jpa.repository.Query com.example.demo.rating.repository.model.Rating]] with root cause
+
+//    Napisac controller nie rozumiem czemu nie moge uzyc build
+
     @Autowired
     public RatingController(RatingService ratingService, UserService userService,
                             TileService tileService) {
