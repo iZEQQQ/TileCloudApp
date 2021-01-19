@@ -11,8 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 public class GetRatingResponse {
 
-    private Long id;
-
     private int rating;
 
 }
