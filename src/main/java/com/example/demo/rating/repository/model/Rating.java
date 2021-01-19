@@ -1,5 +1,7 @@
 package com.example.demo.rating.repository.model;
 
+import com.example.demo.tiles.repository.model.Tile;
+import com.example.demo.user.repository.model.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,16 +14,21 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-//@Entity
+@Entity
 @Table(name="raitings")
+@IdClass(RatingKey.class)
 public class Rating {
 
     private int rating;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_name"))
-    @Column(name = "role_name")
-    private List<String> roles;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "user_name")
+    private User user;
 
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "tile")
+    private Tile tile;
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserDetailsAdapter implements UserDetails {
 
-    private User user;
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -28,12 +28,11 @@ public class Tile {
 
     private double price;
 
-    public Tile(String name, byte[] photo ,String type , double price) {
+    public Tile(String name, byte[] photo, String type, double price) {
         this.name = name;
         this.photo = photo;
         this.type = type;
         this.price = price;
     }
-
 
 }
