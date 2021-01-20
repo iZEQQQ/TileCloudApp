@@ -1,5 +1,6 @@
 package com.example.demo.tiles.controller;
 
+import com.example.demo.rating.service.RecommendationService;
 import com.example.demo.tiles.controller.model.GetTileResponse;
 import com.example.demo.tiles.controller.model.GetTilesResponse;
 import com.example.demo.tiles.repository.model.Tile;
@@ -18,9 +19,12 @@ public class TileController {
 
     private final TileService service;
 
+    private final RecommendationService recommService;
+
     @Autowired
-    public TileController(TileService service) {
+    public TileController(TileService service, RecommendationService recommendationService) {
         this.service = service;
+        this.recommService = recommendationService;
     }
 
     @GetMapping("{tileId}")
@@ -28,6 +32,12 @@ public class TileController {
         return service.findTile(tileId)
                 .map(value -> ResponseEntity.ok(GetTileResponse.entityToDtoMapper().apply(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("recommended")
+    public ResponseEntity<GetTilesResponse> getRecommended() {
+        return ResponseEntity.ok(GetTilesResponse.entityToDtoMapper()
+                .apply(recommService.findRecommendedTilesForCalledPrincipal()));
     }
 
     @GetMapping("")

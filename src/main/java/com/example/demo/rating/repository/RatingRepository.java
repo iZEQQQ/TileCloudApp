@@ -24,4 +24,5 @@ public interface RatingRepository extends JpaRepository<Rating, RatingKey> {
 
     @Query("select r from Rating r where r.user = :user and r.rating > :rating")
     List<Rating> findRatingsByUserAndRating(User user, Double rating);
+
 }
