@@ -75,6 +75,7 @@ public class InitializeData {
                     .name("Malinowa")
                     .photo(getResourceAsByteArray("/jpg/cegielka3.jpg"))
                     .type("Cegla")
+                    .page("domus")
                     .price(24.5)
                     .build();
 
@@ -82,6 +83,7 @@ public class InitializeData {
                     .name("Brazowa")
                     .photo(getResourceAsByteArray("/jpg/cegielka8.jpg"))
                     .type("Cegla")
+                    .page("domus")
                     .price(66.6)
                     .build();
 
@@ -89,12 +91,14 @@ public class InitializeData {
                     .name("Zielona")
                     .photo(getResourceAsByteArray("/jpg/cegielka6.jpg"))
                     .type("Cegla")
+                    .page("eplytki")
                     .price(35.42)
                     .build();
 
             Tile brickFour = Tile.builder()
                     .name("Czekoladowa")
                     .photo(getResourceAsByteArray("/jpg/cegielka4.jpg"))
+                    .page("eplytki")
                     .type("Cegla")
                     .price(55.5)
                     .build();

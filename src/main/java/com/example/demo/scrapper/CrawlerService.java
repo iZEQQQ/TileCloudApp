@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.scrapper;
 
 import com.example.demo.tiles.repository.model.Tile;
 import com.example.demo.tiles.service.TileService;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -119,6 +118,7 @@ public class CrawlerService {
                         .name(title)
                         .photo(imgBytes)
                         .type(type)
+                        .page("eplytki")
                         .price(Double.parseDouble(price))
                         .build();
 
@@ -196,6 +196,7 @@ public class CrawlerService {
                             .name(title+titleLazy)
                             .photo(imgBytes)
                             .type(type)
+                            .page("domus")
                             .price(Double.parseDouble(price))
                             .build();
                     service.createTile(tile);

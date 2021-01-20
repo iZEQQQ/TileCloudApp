@@ -31,6 +31,8 @@ public class GetTilesResponse {
 
             private double rating;
 
+            private String page;
+
     }
 
     @Singular
@@ -48,6 +50,7 @@ public class GetTilesResponse {
                             .id(tile.getId())
                             .name(tile.getName())
                             .price(tile.getPrice())
+                            .page(tile.getPage())
                             .build())
                     .forEach(response::tile);
             return response.build();

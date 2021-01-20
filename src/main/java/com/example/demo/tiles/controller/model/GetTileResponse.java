@@ -20,6 +20,8 @@ public class GetTileResponse {
 
     private String type;
 
+    private String page;
+
     private double price;
 
     private double rating;
@@ -29,6 +31,7 @@ public class GetTileResponse {
                 .id(tile.getId())
                 .name(tile.getName())
                 .type(tile.getType())
+                .page(tile.getPage())
                 .price(tile.getPrice())
                 .build();
     }
