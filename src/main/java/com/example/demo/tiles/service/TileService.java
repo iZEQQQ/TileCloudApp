@@ -31,6 +31,10 @@ public class TileService {
         return repository.findById(id);
     }
 
+    public Optional<Tile> findTileByBody(Tile tile) {
+        return repository.findTile(tile);
+    }
+
     public void createTile(Tile tile) {
         repository.save(tile);
     }

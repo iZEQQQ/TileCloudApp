@@ -7,12 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TileRepository extends JpaRepository<Tile,Long> {
 
     @Query("select t.id from Tile t")
     List<Long> findId();
+
+    @Query("select t from Tile t")
+    Optional<Tile> findTile(Tile tile);
 
     @Query("select t from Tile t where t.type in :types")
     List<Tile> findAllByType(Collection<String> types);
