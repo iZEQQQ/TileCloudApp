@@ -15,19 +15,8 @@ import java.util.function.Supplier;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostRatingRequest {
+public class   PostRatingRequest {
 
-    private int rating;
-
-    public static Function<PostRatingRequest, Rating> dtoToEntityMapper(
-            Supplier<Tile> tileSupplier,
-            Supplier<User> userSupplier) {
-        return request -> Rating.builder()
-                .rating(request.getRating())
-                .tile(tileSupplier.get())
-                .user(userSupplier.get())
-                .build();
-    }
-
+    private double rating;
 
 }

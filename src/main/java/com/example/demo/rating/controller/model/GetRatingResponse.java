@@ -14,11 +14,6 @@ import java.util.function.Function;
 @NoArgsConstructor
 public class GetRatingResponse {
 
-    private int rating;
-
-    public static Function<Rating,GetRatingResponse> entityToDtoMapper(){
-        return rating -> GetRatingResponse.builder()
-                .rating(rating.getRating()).build();
-    }
+    private double rating;
 
 }

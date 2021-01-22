@@ -16,7 +16,7 @@ public interface RatingRepository extends JpaRepository<Rating, RatingKey> {
     @Query("select r from Rating r where r.user = :user")
     List<Rating> findRatingsByUser(User user);
 
-    @Query("select r.tile.id from Rating r where r.tile = :tile")
+    @Query("select r from Rating r where r.tile = :tile")
     List<Rating> findRatingsByTile(Tile tile);
 
     @Query("select r from Rating r where r.tile = :tile and r.user = :user")

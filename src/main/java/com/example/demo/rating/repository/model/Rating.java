@@ -19,7 +19,7 @@ import java.util.List;
 @IdClass(RatingKey.class)
 public class Rating {
 
-    private int rating;
+    private double rating;
 
     @Id
     @ManyToOne

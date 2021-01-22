@@ -1,6 +1,6 @@
 package com.example.demo.rating.controller;
 
-import com.example.demo.rating.controller.model.GetRatingsResponse;
+import com.example.demo.rating.controller.model.GetRatingResponse;
 import com.example.demo.rating.controller.model.PostRatingRequest;
 import com.example.demo.rating.repository.model.Rating;
 import com.example.demo.rating.service.RatingService;
@@ -11,12 +11,11 @@ import com.example.demo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/tiles/{tileId}/ratings")
+@RequestMapping("/api/tiles/{tileId}/rating")
 public class RatingController {
 
     private RatingService ratingService;
@@ -25,7 +24,6 @@ public class RatingController {
 
     private TileService tileService;
 
-//    Napisac controller nie rozumiem czemu nie moge uzyc build
 
     @Autowired
     public RatingController(RatingService ratingService, UserService userService,
@@ -37,28 +35,29 @@ public class RatingController {
     }
 
     @GetMapping
-    public ResponseEntity<GetRatingsResponse> getTileRatings(@PathVariable("tileId") Long tileId) {
+    public ResponseEntity<GetRatingResponse> getTileRatings(@PathVariable("tileId") Long tileId) {
         Optional<Tile> tile = tileService.findTile(tileId);
-        return tile.map(value -> ResponseEntity.ok(GetRatingsResponse.entityToDtoMapper()
-                .apply(ratingService.findAllRatingsByTile(value))))
+        return tile.map(value -> ResponseEntity.ok(GetRatingResponse.builder()
+                .rating(ratingService.countRatingsByTile(value)).build()))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-//    @PostMapping
-//    public ResponseEntity<Void> createRating(@PathVariable("tileId") Long tileId,
-//                                             @RequestBody PostRatingRequest request,
-//                                             UriComponentsBuilder builder) {
-//        Optional<User> user = userService.findLoggedUser();
-//        if (user.isPresent()) {
-//            Rating rating = PostRatingRequest
-//                    .dtoToEntityMapper(tileService.findTile(tileId).orElseThrow(), userService.findLoggedUser().orElseThrow())
-//                    .apply(request);
-//            rating = ratingService.createRating(rating);
-//            return ResponseEntity.created("duno").build();
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @PostMapping
+    public ResponseEntity<Void> createRating(@PathVariable("tileId") Long tileId,
+                                             @RequestBody PostRatingRequest request) {
+        Optional<User> user = userService.findLoggedUser();
+        if (user.isPresent()) {
+            Optional<Tile> tile = tileService.findTile(tileId);
+            if (tile.isPresent()) {
+                Rating rating = ratingService.createRating(tile.get(), user.get(), request.getRating());
+                return ResponseEntity.accepted().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
 
