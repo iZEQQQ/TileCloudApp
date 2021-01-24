@@ -42,7 +42,7 @@ public class RatingController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("add")
     public ResponseEntity<Void> createRating(@PathVariable("tileId") Long tileId,
                                              @RequestBody PostRatingRequest request) {
         Optional<User> user = userService.findLoggedUser();
