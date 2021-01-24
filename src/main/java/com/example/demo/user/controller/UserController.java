@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(allowCredentials = "true")
@@ -33,13 +34,6 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("users/{login}")
-    public ResponseEntity<GetUserResponse> getUser(@PathVariable("login") String login) {
-        Optional<User> user = service.findUser(login);
-        return user.map(value -> ResponseEntity.ok(new GetUserResponse(value.getLogin())))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     @GetMapping("users")
     public GetUsersResponse getUsers() {
         return new GetUsersResponse(service.findAllLogins());
@@ -48,7 +42,7 @@ public class UserController {
     @PostMapping("users")
     public ResponseEntity<Void> postUser(@RequestBody PostUserRequest request) {
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-        User user = new User(request.getLogin(), bc.encode(request.getPassword()));
+        User user = new User(request.getLogin(), bc.encode(request.getPassword()), List.of("User"));
         service.createUser(user);
         return ResponseEntity.created(URI.create("http://localhost:8080/api/users/" + user.getLogin())).build();
     }

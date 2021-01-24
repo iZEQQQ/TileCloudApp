@@ -26,9 +26,4 @@ public class User {
     @Column(name = "role_name")
     private List<String> roles;
 
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
-
-}
+ }
