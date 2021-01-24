@@ -24,7 +24,6 @@ public class GetTileResponse {
 
     private double price;
 
-    private double rating;
 
     public static Function<Tile, GetTileResponse> entityToDtoMapper() {
         return tile -> GetTileResponse.builder()

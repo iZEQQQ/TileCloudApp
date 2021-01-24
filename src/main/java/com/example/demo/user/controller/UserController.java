@@ -8,6 +8,7 @@ import com.example.demo.user.repository.model.User;
 import com.example.demo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -46,7 +47,8 @@ public class UserController {
 
     @PostMapping("users")
     public ResponseEntity<Void> postUser(@RequestBody PostUserRequest request) {
-        User user = new User(request.getLogin(), request.getPassword());
+        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+        User user = new User(request.getLogin(), bc.encode(request.getPassword()));
         service.createUser(user);
         return ResponseEntity.created(URI.create("http://localhost:8080/api/users/" + user.getLogin())).build();
     }

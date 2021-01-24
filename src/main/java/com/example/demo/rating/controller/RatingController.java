@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+@CrossOrigin(allowCredentials = "true")
 @RestController
 @RequestMapping("/api/tiles/{tileId}/rating")
 public class RatingController {

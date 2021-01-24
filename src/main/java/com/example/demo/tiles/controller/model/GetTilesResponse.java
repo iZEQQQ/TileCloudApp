@@ -29,8 +29,6 @@ public class GetTilesResponse {
 
             private double price;
 
-            private double rating;
-
             private String page;
 
     }
