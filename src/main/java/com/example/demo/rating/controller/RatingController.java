@@ -49,7 +49,7 @@ public class RatingController {
         if (user.isPresent()) {
             Optional<Tile> tile = tileService.findTile(tileId);
             if (tile.isPresent()) {
-                Rating rating = ratingService.createRating(tile.get(), user.get(), request.getRating());
+                ratingService.createRating(tile.get(), user.get(), request.getRating());
                 return ResponseEntity.accepted().build();
             } else {
                 return ResponseEntity.notFound().build();

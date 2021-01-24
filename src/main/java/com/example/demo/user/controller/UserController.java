@@ -15,7 +15,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(allowCredentials = "true")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -44,7 +43,7 @@ public class UserController {
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         User user = new User(request.getLogin(), bc.encode(request.getPassword()), List.of("User"));
         service.createUser(user);
-        return ResponseEntity.created(URI.create("http://localhost:8080/api/users/" + user.getLogin())).build();
+        return ResponseEntity.ok().build();
     }
 
 
