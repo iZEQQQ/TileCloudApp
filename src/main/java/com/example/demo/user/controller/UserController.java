@@ -43,7 +43,7 @@ public class UserController {
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         User user = new User(request.getLogin(), bc.encode(request.getPassword()), List.of("User"));
         service.createUser(user);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.created(URI.create("http://localhost:8080/api/users/" + user.getLogin())).build();
     }
 
 
