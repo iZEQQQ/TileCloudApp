@@ -1,0 +1,14 @@
+###
+POST http://localhost:8080/api/tiles/1/rating/add
+Authorization: Basic a2V2aW46VSRlcjEyMzQ=
+Content-Type: application/json
+
+{
+  "rating": "4"
+}
+
+###
+GET http://localhost:8080/api/tiles/1/rating
+Authorization: Basic a2V2aW46VSRlcjEyMzQ=
+Content-Type: application/json
+

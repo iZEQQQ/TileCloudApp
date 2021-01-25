@@ -2,12 +2,10 @@ package com.example.demo.tiles.controller;
 
 import com.example.demo.rating.service.RecommendationService;
 import com.example.demo.tiles.controller.model.GetTileResponse;
-import com.example.demo.tiles.controller.model.GetTileSizeResponse;
 import com.example.demo.tiles.controller.model.GetTilesResponse;
 import com.example.demo.tiles.repository.model.Tile;
 import com.example.demo.tiles.service.TileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,15 +41,10 @@ public class TileController {
     }
 
     @GetMapping
-    public ResponseEntity<GetTilesResponse> getTiles(@RequestParam("size") int size, @RequestParam("page") int page) {
-        return ResponseEntity.ok(GetTilesResponse.entityToDtoMapper().apply(service.findAllTiles(PageRequest.of(page, size))));
+    public ResponseEntity<GetTilesResponse> getTiles() {
+        return ResponseEntity.ok(GetTilesResponse.entityToDtoMapper().apply(service.findAllTiles()));
     }
 
-    @GetMapping
-    public ResponseEntity<GetTileSizeResponse> getTilesSize() {
-        Long size = service.findTilesSize();
-        return ResponseEntity.ok(new GetTileSizeResponse(size));
-    }
 
     @GetMapping(value = "{id}/photo", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getTilePhoto(@PathVariable("id") long id) {
