@@ -44,17 +44,17 @@ public class CrawlerService {
         this.service = service;
     }
 
-//    @PostConstruct
-//    public void init() throws IOException {
-//        scrapEplytki();
-//        scrapDomus();
-//    }
+    @PostConstruct
+    public void init() throws IOException {
+        scrapEplytki();
+        scrapDomus();
+    }
 
 
     @Scheduled(cron = "0 0 0 * * 0")
     public void scrapEplytki() throws IOException {
         String url = "https://www.eplytki.pl/plytki-lazienkowe.html?limit=72";
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             Document doc = Jsoup.connect(url).get();
             Elements items = doc.select(".flag-p.item.last");
             items.forEach(element -> {
@@ -129,7 +129,7 @@ public class CrawlerService {
     @Scheduled(cron = "0 0 0 * * 0")
     public void scrapDomus() throws IOException {
         String url = "https://domus-sklep.pl/1107-wszystkie-plytki";
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             Document doc = Jsoup.connect(url).get();
             Elements items = doc.select(".pro_outer_box");
             items.forEach(element -> {
